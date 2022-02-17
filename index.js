@@ -15,9 +15,9 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany();
   })
-  .then((response) => {
-    return Recipe.insertMany(data);
-  })
+
+  //Iteración 2: 
+
   .then(() => {
     return Recipe.create({
       title: "La receta más rica de todas",
@@ -35,6 +35,22 @@ mongoose
   })
   .then((response) => {
     console.log(response.title)
+  })
+
+  //Iteración 3:
+
+  .then((response) => {
+    return Recipe.insertMany(data);
+  })
+  .then((response)=> {
+    response.forEach((elem) => {
+      console.log(elem.title)
+    })
+  })
+
+//Iteración 4:
+
+  .then((response)=>{  
     return Recipe.findOneAndUpdate(
       { title: "Rigatoni alla Genovese" },
       { duration: 100 },
@@ -44,14 +60,20 @@ mongoose
   .then((response) => {
     console.log(response.duration);
   })
+
+  //Iteración 5:
+
   .then((response) => {
     return Recipe.findOneAndDelete({ title: "Carrot Cake" });
   })
   .then((response) => {
     console.log("Borrado con éxito!");
   })
+
+//Iteración 6:
+
   .then(() => {
-    mongoose.disconnect(MONGODB_URI);
+    mongoose.connection.close();
   })
   .then((response) => {
     console.log("Desconectado :)");
