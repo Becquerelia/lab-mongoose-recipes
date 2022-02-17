@@ -79,6 +79,8 @@ mongoose
     console.log("Desconectado :)");
   })
 
+  //!LAS ITERACIONES PROBADAS CON ASYNC/AWAIT ESTÁN EN OTRO ARCHIVO LLAMADO asyncawait.js  
+
   .catch((error) => {
     console.error("Error connecting to the database", error);
   });
